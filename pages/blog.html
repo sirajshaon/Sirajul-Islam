@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Sirajul Islam</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✍</text></svg>">
+<link rel="stylesheet" href="../css/variables.css"><link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/cursor.css"><link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/navbar.css"><link rel="stylesheet" href="../css/sections.css">
+<link rel="stylesheet" href="../css/responsive.css">
+<style>
+.blog-featured{background:var(--bg-card);border:1px solid var(--glass-border);border-radius:var(--radius-xl);overflow:hidden;display:grid;grid-template-columns:1fr 1.1fr;margin-bottom:3.5rem;transition:border-color var(--transition-med)}
+.blog-featured:hover{border-color:var(--glass-border-hover)}
+.blog-featured-thumb{background:linear-gradient(135deg,var(--dark-teal-3),var(--space-indigo));min-height:300px;display:flex;align-items:center;justify-content:center;font-size:4rem;position:relative;overflow:hidden}
+.blog-featured-thumb img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.blog-featured-body{padding:2.5rem;display:flex;flex-direction:column;justify-content:center;gap:1rem}
+.blog-featured-label{font-family:var(--font-mono);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-cyan);display:flex;align-items:center;gap:.5rem}
+.blog-featured-label::before{content:'★'}
+.blog-featured-title{font-family:var(--font-display);font-size:clamp(1.2rem,2.5vw,1.65rem);font-weight:800;color:var(--text-primary);line-height:1.3}
+.blog-featured-excerpt{font-size:.92rem;color:var(--text-secondary);line-height:1.78}
+.blog-featured-meta{font-size:.72rem;color:var(--text-muted);font-family:var(--font-mono);display:flex;gap:1.2rem}
+.blog-controls{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:2rem}
+.blog-search-wrap{position:relative}
+.blog-search{background:var(--bg-input);border:1px solid var(--glass-border);border-radius:var(--radius-pill);padding:.55rem 1rem .55rem 2.4rem;color:var(--text-primary);font-family:var(--font-body);font-size:.85rem;outline:none;width:240px;transition:border-color var(--transition-fast)}
+.blog-search:focus{border-color:rgba(0,212,232,.45)}
+.blog-search-icon{position:absolute;left:.85rem;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:.85rem;pointer-events:none}
+.blog-read-more{display:inline-flex;align-items:center;gap:.4rem;font-size:.8rem;color:var(--accent-cyan);padding:.38rem 1rem;border:1px solid rgba(0,212,232,.25);border-radius:var(--radius-sm);transition:all var(--transition-fast);background:rgba(0,212,232,.05);cursor:pointer;font-family:var(--font-body)}
+.blog-read-more:hover{background:rgba(0,212,232,.14)}
+@media(max-width:720px){.blog-featured{grid-template-columns:1fr}.blog-featured-thumb{min-height:200px}}
+</style>
+</head>
+<body>
+<div id="cursor-dot"></div><div id="cursor-ring"></div>
+<canvas id="bg-canvas"></canvas>
+<nav id="navbar">
+  <a href="../index.html" class="nav-logo"><div class="nav-logo-mark">SI</div><span data-personal="name">Sirajul Islam</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li><li><a href="resume.html">Resume</a></li>
+    <li><a href="projects.html">Projects</a></li><li><a href="gallery.html">Gallery</a></li>
+    <li><a href="services.html">Services</a></li><li><a href="blog.html" class="active">Blog</a></li>
+    <li><a href="certifications.html">Certificates</a></li><li><a href="../index.html#contact-sec">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"><div class="theme-toggle-thumb"></div></button>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<nav class="nav-mobile" id="nav-mobile">
+  <a href="../index.html">Home</a><a href="resume.html">Resume</a><a href="projects.html">Projects</a>
+  <a href="gallery.html">Gallery</a><a href="services.html">Services</a><a href="blog.html">Blog</a>
+  <a href="certifications.html">Certificates</a><a href="../index.html#contact-sec">Contact</a>
+</nav>
+<div class="page-hero">
+  <div class="circuit-bg"></div>
+  <div class="page-hero-inner">
+    <div class="section-label">Insights & Ideas</div>
+    <h1>Technical Blog</h1>
+    <p>Thoughts on power engineering, smart grid technologies, and career development.
+      <!--  Add posts in <code style="font-size:.8em;background:rgba(0,212,232,.1);padding:.1em .4em;border-radius:4px">js/data.js → blog</code> -->
+    </p>
+  </div>
+</div>
+<section>
+  <div class="max-w">
+    <!-- All blog content (featured + grid + search + filter) rendered by render.js -->
+    <div id="blog-full-section"></div>
+  </div>
+</section>
+<footer>
+  <div class="footer-logo" data-personal="name">Sirajul Islam</div>
+  <div class="footer-links"><a href="../index.html">Home</a><a href="resume.html">Resume</a><a href="../index.html#contact-sec">Contact</a></div>
+  <div class="footer-copy">© 2025 Sirajul Islam</div>
+</footer>
+<script src="../js/data.js"></script><script src="../js/render.js"></script>
+<script src="../js/cursor.js"></script><script src="../js/canvas.js"></script>
+<script src="../js/main.js"></script><script src="../js/logo.js"></script>
+</body>
+</html>

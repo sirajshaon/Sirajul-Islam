@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery — Sirajul Islam</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📷</text></svg>">
+<link rel="stylesheet" href="../css/variables.css"><link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/cursor.css"><link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/navbar.css"><link rel="stylesheet" href="../css/sections.css">
+<link rel="stylesheet" href="../css/gallery.css"><link rel="stylesheet" href="../css/responsive.css">
+</head>
+<body>
+<div id="cursor-dot"></div><div id="cursor-ring"></div>
+<canvas id="bg-canvas"></canvas>
+<nav id="navbar">
+  <a href="../index.html" class="nav-logo"><div class="nav-logo-mark">SI</div><span data-personal="name">Sirajul Islam</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li><li><a href="resume.html">Resume</a></li>
+    <li><a href="projects.html">Projects</a></li><li><a href="gallery.html" class="active">Gallery</a></li>
+    <li><a href="services.html">Services</a></li><li><a href="blog.html">Blog</a></li>
+    <li><a href="certifications.html">Certificates</a></li><li><a href="../index.html#contact-sec">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"><div class="theme-toggle-thumb"></div></button>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<nav class="nav-mobile" id="nav-mobile">
+  <a href="../index.html">Home</a><a href="resume.html">Resume</a><a href="projects.html">Projects</a>
+  <a href="gallery.html">Gallery</a><a href="services.html">Services</a><a href="blog.html">Blog</a>
+  <a href="certifications.html">Certificates</a><a href="../index.html#contact-sec">Contact</a>
+</nav>
+<div class="page-hero">
+  <div class="circuit-bg"></div>
+  <div class="page-hero-inner">
+    <div class="section-label">Visual Story</div>
+    <h1>Photo Gallery</h1>
+    <p>A cinematic glimpse into the substation, the field, lifestyle, and the spirit of a Bangladeshi power engineer. <!-- Add photos in <code style="font-size:.8em;background:rgba(0,212,232,.1);padding:.1em .4em;border-radius:4px">js/data.js → gallery</code> -->
+    </p>
+  </div>
+</div>
+<section>
+  <div class="max-w">
+    <!-- Tabs -->
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:.5rem" class="reveal">
+      <div class="gallery-tabs" id="gallery-tabs">
+        <button class="gallery-tab active" data-cat="all">All <span class="tab-count" id="count-all">0</span></button>
+        <button class="gallery-tab" data-cat="substation">⚡ Substation <span class="tab-count" id="count-substation">0</span></button>
+        <button class="gallery-tab" data-cat="portrait">👤 Portrait <span class="tab-count" id="count-portrait">0</span></button>
+        <button class="gallery-tab" data-cat="lifestyle">🌿 Lifestyle <span class="tab-count" id="count-lifestyle">0</span></button>
+        <button class="gallery-tab" data-cat="sports">🏏 Sports <span class="tab-count" id="count-sports">0</span></button>
+      </div>
+      <span id="gallery-count" style="font-family:var(--font-mono);font-size:.72rem;color:var(--text-muted)"></span>
+    </div>
+    <!-- Gallery grid (populated by render.js) -->
+    <div id="gallery-grid-container" class="gallery-grid reveal"></div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-nav lightbox-prev" onclick="prevImage()">‹</button>
+  <div class="lightbox-inner">
+    <img id="lightbox-img" src="" alt="Gallery Image">
+    <div id="lightbox-caption" class="lightbox-caption"></div>
+  </div>
+  <button class="lightbox-nav lightbox-next" onclick="nextImage()">›</button>
+</div>
+
+<footer>
+  <div class="footer-logo" data-personal="name">Sirajul Islam</div>
+  <div class="footer-links"><a href="../index.html">Home</a><a href="resume.html">Resume</a><a href="../index.html#contact-sec">Contact</a></div>
+  <div class="footer-copy">© 2025 Sirajul Islam</div>
+</footer>
+<script src="../js/data.js"></script><script src="../js/render.js"></script>
+<script src="../js/cursor.js"></script><script src="../js/canvas.js"></script>
+<script src="../js/main.js"></script><script src="../js/gallery.js"></script>
+<script src="../js/logo.js"></script>
+<!-- Tab filtering and lightbox handled by gallery.js -->
+</body>
+</html>

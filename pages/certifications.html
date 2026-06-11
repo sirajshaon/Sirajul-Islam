@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certifications — Sirajul Islam</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏆</text></svg>">
+<link rel="stylesheet" href="../css/variables.css"><link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/cursor.css"><link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/navbar.css"><link rel="stylesheet" href="../css/sections.css">
+<link rel="stylesheet" href="../css/gallery.css"><link rel="stylesheet" href="../css/responsive.css">
+<style>
+.upload-guide{background:rgba(0,100,102,.08);border:1px dashed rgba(0,212,232,.3);border-radius:var(--radius-lg);padding:2rem;margin-bottom:3rem;display:flex;align-items:flex-start;gap:1.2rem}
+.upload-guide-icon{font-size:2rem;flex-shrink:0}
+.upload-guide-title{font-family:var(--font-display);font-weight:700;color:var(--text-primary);margin-bottom:.4rem}
+.upload-guide-text{font-size:.85rem;color:var(--text-secondary);line-height:1.7}
+.upload-guide-code{font-family:var(--font-mono);font-size:.78rem;background:rgba(0,212,232,.08);border:1px solid rgba(0,212,232,.15);border-radius:var(--radius-sm);padding:.15rem .5rem;color:var(--accent-cyan)}
+.cert-cat-header{display:flex;align-items:center;gap:.8rem;margin:3rem 0 1.2rem;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent-cyan)}
+.cert-cat-header::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(0,212,232,.3),transparent)}
+</style>
+</head>
+<body>
+<div id="cursor-dot"></div><div id="cursor-ring"></div>
+<canvas id="bg-canvas"></canvas>
+<nav id="navbar">
+  <a href="../index.html" class="nav-logo"><div class="nav-logo-mark">SI</div><span data-personal="name">Sirajul Islam</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li><li><a href="resume.html">Resume</a></li>
+    <li><a href="projects.html">Projects</a></li><li><a href="gallery.html">Gallery</a></li>
+    <li><a href="services.html">Services</a></li><li><a href="blog.html">Blog</a></li>
+    <li><a href="certifications.html" class="active">Certificates</a></li>
+    <li><a href="../index.html#contact-sec">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"><div class="theme-toggle-thumb"></div></button>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<nav class="nav-mobile" id="nav-mobile">
+  <a href="../index.html">Home</a><a href="resume.html">Resume</a><a href="projects.html">Projects</a>
+  <a href="gallery.html">Gallery</a><a href="services.html">Services</a><a href="blog.html">Blog</a>
+  <a href="certifications.html">Certificates</a><a href="../index.html#contact-sec">Contact</a>
+</nav>
+
+<div class="page-hero">
+  <div class="circuit-bg"></div>
+  <div class="page-hero-inner">
+    <div class="section-label">Credentials & Recognition</div>
+    <h1>Certifications</h1>
+    <p>Professional certificates, academic credentials, and achievements.
+      <!--  Add new ones in <code style="font-size:.8em;background:rgba(0,212,232,.1);padding:.1em .4em;border-radius:4px">js/data.js → certifications</code> -->
+    </p>
+  </div>
+</div>
+
+<section>
+  <div class="max-w">
+
+    <!-- <div class="upload-guide reveal">
+      <div class="upload-guide-icon">📂</div>
+      <div>
+        <div class="upload-guide-title">Adding Certificates</div>
+        <div class="upload-guide-text">
+          Place images in <span class="upload-guide-code">assets/images/certifications/</span> then add an entry to
+          <span class="upload-guide-code">SiteData.certifications</span> in <span class="upload-guide-code">js/data.js</span>.
+          Supported: <span class="upload-guide-code">JPG</span> <span class="upload-guide-code">PNG</span>.
+          The page updates automatically — no HTML editing required.
+        </div>
+      </div>
+    </div> -->
+
+    <!-- Filter bar -->
+    <div class="filter-bar reveal" id="cert-filters">
+      <button class="filter-btn active" data-cat="all">All</button>
+      <button class="filter-btn" data-cat="engineering">Engineering</button>
+      <button class="filter-btn" data-cat="professional">Professional</button>
+      <button class="filter-btn" data-cat="education">Education</button>
+      <button class="filter-btn" data-cat="workshop">Workshop</button>
+    </div>
+
+    <!-- Grid by category (rendered by render.js → certifications) -->
+    <div class="cert-cat-header reveal">Engineering Credentials</div>
+    <div class="cert-grid" id="certs-engineering"></div>
+
+    <div class="cert-cat-header reveal">Professional & Industry</div>
+    <div class="cert-grid" id="certs-professional"></div>
+
+    <div class="cert-cat-header reveal">Workshops & Training</div>
+    <div class="cert-grid" id="certs-workshop"></div>
+
+    <!-- All certs combined (used by filter) -->
+    <div id="certs-grid" style="display:none"></div>
+
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <div class="lightbox-inner">
+    <img id="lightbox-img" src="" alt="Certificate">
+    <div id="lightbox-caption" class="lightbox-caption"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo" data-personal="name">Sirajul Islam</div>
+  <div class="footer-links"><a href="../index.html">Home</a><a href="resume.html">Resume</a><a href="../index.html#contact-sec">Contact</a></div>
+  <div class="footer-copy">© 2025 Sirajul Islam</div>
+</footer>
+
+<script src="../js/data.js"></script>
+<script src="../js/render.js"></script>
+<script src="../js/cursor.js"></script>
+<script src="../js/canvas.js"></script>
+<script src="../js/main.js"></script>
+<script src="../js/gallery.js"></script>
+<script src="../js/logo.js"></script>
+<script>
+/* Render each category section separately */
+document.addEventListener('DOMContentLoaded', () => {
+  Render.certifications('certs-engineering', 'engineering');
+  Render.certifications('certs-professional', 'professional');
+  Render.certifications('certs-workshop', 'workshop');
+
+  /* Category filter: show/hide entire sections */
+  document.getElementById('cert-filters').addEventListener('click', e => {
+    const btn = e.target.closest('.filter-btn');
+    if (!btn) return;
+    document.querySelectorAll('#cert-filters .filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat = btn.dataset.cat;
+    const sections = {
+      engineering: ['certs-engineering'],
+      professional: ['certs-professional'],
+      workshop: ['certs-workshop'],
+      education: ['certs-education'],
+    };
+    const targets = cat === 'all' ? Object.values(sections).flat() : (sections[cat] || []);
+    const allIds  = Object.values(sections).flat();
+    allIds.forEach(id => {
+      const el   = document.getElementById(id);
+      const hdr  = el ? el.previousElementSibling : null;
+      const show = cat === 'all' || targets.includes(id);
+      if (el)  el.style.display  = show ? '' : 'none';
+      if (hdr && hdr.classList.contains('cert-cat-header')) hdr.style.display = show ? '' : 'none';
+    });
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Sirajul Islam</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠</text></svg>">
+<link rel="stylesheet" href="../css/variables.css"><link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/cursor.css"><link rel="stylesheet" href="../css/components.css">
+<link rel="stylesheet" href="../css/navbar.css"><link rel="stylesheet" href="../css/sections.css">
+<link rel="stylesheet" href="../css/responsive.css">
+<style>
+.cta-banner{background:linear-gradient(135deg,var(--dark-teal-3),var(--space-indigo),var(--midnight-violet));border:1px solid var(--glass-border);border-radius:var(--radius-xl);padding:4rem 3rem;text-align:center;position:relative;overflow:hidden;margin-top:5rem}
+.cta-banner::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(0,212,232,.02) 0px,rgba(0,212,232,.02) 1px,transparent 1px,transparent 50px)}
+.cta-banner h2{position:relative;z-index:1;font-size:clamp(1.6rem,3.5vw,2.5rem);margin-bottom:1rem}
+.cta-banner p{position:relative;z-index:1;color:var(--text-secondary);max-width:500px;margin:0 auto 2rem}
+.cta-banner .btns{position:relative;z-index:1;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+</style>
+</head>
+<body>
+<div id="cursor-dot"></div><div id="cursor-ring"></div>
+<canvas id="bg-canvas"></canvas>
+<nav id="navbar">
+  <a href="../index.html" class="nav-logo"><div class="nav-logo-mark">SI</div><span data-personal="name">Sirajul Islam</span></a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li><li><a href="resume.html">Resume</a></li>
+    <li><a href="projects.html">Projects</a></li><li><a href="gallery.html">Gallery</a></li>
+    <li><a href="services.html" class="active">Services</a></li><li><a href="blog.html">Blog</a></li>
+    <li><a href="certifications.html">Certificates</a></li><li><a href="../index.html#contact-sec">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"><div class="theme-toggle-thumb"></div></button>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<nav class="nav-mobile" id="nav-mobile">
+  <a href="../index.html">Home</a><a href="resume.html">Resume</a><a href="projects.html">Projects</a>
+  <a href="gallery.html">Gallery</a><a href="services.html">Services</a><a href="blog.html">Blog</a>
+  <a href="certifications.html">Certificates</a><a href="../index.html#contact-sec">Contact</a>
+</nav>
+<div class="page-hero">
+  <div class="circuit-bg"></div>
+  <div class="page-hero-inner">
+    <div class="section-label">What I Offer</div>
+    <h1>Services</h1>
+    <p>Professional engineering expertise, education, and digital skills.
+      <!--  Edit services in <code style="font-size:.8em;background:rgba(0,212,232,.1);padding:.1em .4em;border-radius:4px">js/data.js → services</code> -->
+    </p>
+  </div>
+</div>
+<section>
+  <div class="max-w">
+    <div id="services-grid" class="services-grid"></div>
+    <div class="cta-banner reveal">
+      <h2 class="section-title" style="margin-bottom:1rem">Ready to Work Together?</h2>
+      <p>Whether it's an engineering challenge, tutoring, or a design project — let's connect and build something meaningful.</p>
+      <div class="btns">
+        <a href="../index.html#contact-sec" class="btn-primary">✉ Get In Touch</a>
+        <a href="resume.html" class="btn-outline">📄 View Resume</a>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="footer-logo" data-personal="name">Sirajul Islam</div>
+  <div class="footer-links"><a href="../index.html">Home</a><a href="resume.html">Resume</a><a href="../index.html#contact-sec">Contact</a></div>
+  <div class="footer-copy">© 2025 Sirajul Islam</div>
+</footer>
+<script src="../js/data.js"></script><script src="../js/render.js"></script>
+<script src="../js/cursor.js"></script><script src="../js/canvas.js"></script>
+<script src="../js/main.js"></script><script src="../js/logo.js"></script>
+</body>
+</html>

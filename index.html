@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sirajul Islam | Power Systems Engineer · Bangladesh</title>
+<meta name="description" content="Sirajul Islam – Electrical & Electronic Engineer at Power Grid Bangladesh PLC.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/cursor.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/navbar.css">
+<link rel="stylesheet" href="css/hero.css">
+<link rel="stylesheet" href="css/sections.css">
+<link rel="stylesheet" href="css/responsive.css">
+<style>
+#contact-modal{position:fixed;inset:0;z-index:8500;background:rgba(2,7,12,.88);backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s}
+#contact-modal.open{opacity:1;visibility:visible}
+.modal-box{background:rgba(8,18,28,.97);border:1px solid var(--glass-border);border-radius:var(--radius-xl);padding:2.5rem;max-width:480px;width:100%;position:relative}
+.modal-box::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,212,232,.5),transparent)}
+.modal-close{position:absolute;top:1.1rem;right:1.1rem;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:var(--text-muted);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all var(--transition-fast)}
+.modal-close:hover{color:var(--text-primary);border-color:rgba(0,212,232,.3)}
+</style>
+</head>
+<body>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<div id="loading-screen">
+  <div class="loading-initials">SI</div>
+  <p class="loading-tagline" data-personal="name">Sirajul Islam</p>
+  <div class="loading-bar-wrap"><div class="loading-bar-fill"></div></div>
+  <p class="loading-status">Initializing Portfolio…</p>
+</div>
+
+<canvas id="bg-canvas"></canvas>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    <div class="nav-logo-mark">SI</div>
+    <span data-personal="name">Sirajul Islam</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#hero" class="active">Home</a></li>
+    <li><a href="pages/resume.html">Resume</a></li>
+    <li><a href="pages/projects.html">Projects</a></li>
+    <li><a href="pages/gallery.html">Gallery</a></li>
+    <li><a href="pages/services.html">Services</a></li>
+    <li><a href="pages/blog.html">Blog</a></li>
+    <li><a href="pages/certifications.html">Certificates</a></li>
+    <li><a href="#contact-sec">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"><div class="theme-toggle-thumb"></div></button>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<nav class="nav-mobile" id="nav-mobile">
+  <a href="#hero">Home</a><a href="pages/resume.html">Resume</a>
+  <a href="pages/projects.html">Projects</a><a href="pages/gallery.html">Gallery</a>
+  <a href="pages/services.html">Services</a><a href="pages/blog.html">Blog</a>
+  <a href="pages/certifications.html">Certificates</a><a href="#contact-sec">Contact</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="circuit-bg"></div>
+  <div class="hero-bg-image">
+    <img src="assets/images/hero/cover.png" alt="" aria-hidden="true" onerror="this.parentElement.style.display='none'">
+  </div>
+  <div class="hero-inner">
+    <div class="hero-badge"><div class="blink-dot"></div><span data-personal="org">Power Grid Bangladesh PLC</span></div>
+    <h1 class="hero-name" data-personal="name">Sirajul Islam</h1>
+    <p class="hero-tagline" data-personal="tagline">Engineer · Designer · Problem Solver</p>
+    <div class="hero-rotating-wrap"><span class="hero-rotating" id="hero-rotating">&nbsp;</span></div>
+    <div class="hero-btns">
+      <a href="pages/projects.html" class="btn-primary">⚡ Explore Portfolio</a>
+      <a href="pages/resume.html" class="btn-outline">👤 About Me</a>
+      <button onclick="openContactModal()" class="btn-outline">✉ Contact</button>
+    </div>
+  </div>
+  <a href="#about" class="hero-scroll"><div class="scroll-arrow"></div>scroll</a>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="max-w">
+    <div id="about-container"></div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="background:linear-gradient(180deg,rgba(11,82,91,.05),rgba(39,38,64,.07))">
+  <div class="max-w">
+    <div class="section-label reveal">Journey</div>
+    <h2 class="section-title reveal">Professional Timeline</h2>
+    <div class="divider"></div>
+    <div id="experience-timeline" class="reveal"></div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="background:linear-gradient(180deg,rgba(39,38,64,.07),rgba(11,82,91,.05))">
+  <div class="max-w">
+    <div class="section-label reveal">Arsenal</div>
+    <h2 class="section-title reveal">Skills & Expertise</h2>
+    <p class="section-subtitle reveal">Core engineering competencies combined with modern digital tools.</p>
+    <div id="skills-grid" class="skills-grid"></div>
+  </div>
+</section>
+
+<!-- PERSONALITY -->
+<section id="personality" style="background:linear-gradient(180deg,rgba(39,38,64,.07),rgba(11,82,91,.05))">
+  <div class="max-w">
+    <div id="personality-container" style="display:grid;grid-template-columns:1.15fr 1fr;gap:4rem;align-items:center"></div>
+  </div>
+</section>
+
+<!-- PROJECTS TEASER -->
+<section id="projects-teaser" style="background:linear-gradient(180deg,rgba(11,82,91,.05),rgba(39,38,64,.07))">
+  <div class="max-w">
+    <div class="section-label reveal">Engineering Work</div>
+    <h2 class="section-title reveal">Featured Projects</h2>
+    <p class="section-subtitle reveal">Selected technical explorations — from high-voltage grid infrastructure to digital design.</p>
+    <div id="projects-teaser-grid"></div>
+    <div style="text-align:center;margin-top:2.5rem" class="reveal">
+      <a href="pages/projects.html" class="btn-outline">View All Projects →</a>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG TEASER -->
+<section id="blog-teaser" style="background:linear-gradient(180deg,rgba(11,82,91,.04),transparent)">
+  <div class="max-w">
+    <div class="section-label reveal">Insights</div>
+    <h2 class="section-title reveal">Latest Articles</h2>
+    <div id="blog-teaser-section"></div>
+    <div style="text-align:center;margin-top:2.5rem" class="reveal">
+      <a href="pages/blog.html" class="btn-outline">View All Articles →</a>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL -->
+<section id="github-sec" style="background:linear-gradient(180deg,transparent,rgba(39,38,64,.06))">
+  <div class="max-w">
+    <div class="section-label reveal">Connect</div>
+    <h2 class="section-title reveal">Find Me Online</h2>
+    <p class="section-subtitle reveal">Real-time profile previews across platforms. Let's connect and collaborate.</p>
+    <div id="social-grid" class="social-profile-grid reveal"></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact-sec">
+  <div class="max-w">
+    <div class="section-label reveal">Get In Touch</div>
+    <h2 class="section-title reveal">Let's Connect</h2>
+    <p class="section-subtitle reveal">Open to engineering consultation, tutoring, collaboration, or just a meaningful conversation about technology.</p>
+    <div class="contact-grid">
+      <div id="contact-info" class="reveal"></div>
+      <div id="contact-form-wrap" class="reveal reveal-d1"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo" data-personal="name">Sirajul Islam</div>
+  <div class="footer-links">
+    <a href="pages/resume.html">Resume</a>
+    <a href="pages/projects.html">Projects</a>
+    <a href="pages/gallery.html">Gallery</a>
+    <a href="pages/blog.html">Blog</a>
+  </div>
+  <div class="footer-copy">© 2025 Sirajul Islam. Crafted with precision & passion. 🇧🇩</div>
+</footer>
+
+<!-- Contact Modal (populated from SiteData) -->
+<div id="contact-modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeContactModal()">✕</button>
+    <h3 style="font-family:var(--font-display);font-size:1.2rem;font-weight:700;color:var(--text-primary);margin-bottom:.4rem">Say Hello 👋</h3>
+    <p style="font-size:.85rem;color:var(--text-secondary);margin-bottom:1.5rem">Reach out for collaborations, consultation, or just to connect.</p>
+    <div style="display:flex;flex-direction:column;gap:.75rem" id="modal-links"></div>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/render.js"></script>
+<script src="js/cursor.js"></script>
+<script src="js/canvas.js"></script>
+<script src="js/main.js"></script>
+<script src="js/contact.js"></script>
+<script src="js/sound.js"></script>
+<script src="js/logo.js"></script>
+<script>
+/* Populate contact modal from SiteData */
+document.addEventListener('DOMContentLoaded', () => {
+  const d = SiteData.personal;
+  document.getElementById('modal-links').innerHTML = `
+    <a href="mailto:${d.email}" class="btn-primary" style="justify-content:center">✉ ${d.email}</a>
+    <a href="https://wa.me/${d.whatsapp}" target="_blank" class="btn-outline" style="justify-content:center">📱 WhatsApp Chat</a>
+    <a href="#contact-sec" onclick="closeContactModal()" class="btn-outline" style="justify-content:center">📝 Full Contact Form</a>`;
+});
+</script>
+</body>
+</html>
