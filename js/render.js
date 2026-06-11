@@ -536,7 +536,7 @@ const Render = (() => {
     <div class="cv-sheet">
       <aside class="cv-sidebar">
         <div>
-          <div class="cv-avatar"><img src="${p('assets/images/profile/profile_1.jpg')}" alt="${d.name}" onerror="this.outerHTML='<span>👤</span>'"></div>
+          <div class="cv-avatar"><img src="${p('assets/images/profile/profile_2.jpg')}" alt="${d.name}" onerror="this.outerHTML='<span>👤</span>'"></div>
           <div class="cv-sidebar-name">${d.name}</div>
           <div class="cv-sidebar-role">${d.role} · ${d.orgShort}</div>
         </div>
