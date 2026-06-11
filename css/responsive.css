@@ -1,0 +1,148 @@
+/* ============================================================
+   RESPONSIVE — Mobile-first breakpoints
+   ============================================================ */
+
+/* ── Large Desktop (≥ 1400px) ────────────────────────────── */
+@media (min-width: 1400px) {
+  :root { --max-w: 1320px; }
+}
+
+/* ── Tablet / small desktop (≤ 1024px) ──────────────────── */
+@media (max-width: 1024px) {
+  .github-inner { grid-template-columns: 1fr; }
+  .personality-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .gallery-grid, .cert-grid { columns: 2; }
+}
+
+/* ── Tablet portrait (≤ 900px) ───────────────────────────── */
+@media (max-width: 900px) {
+  /* Navbar */
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+
+  /* About */
+  .about-grid { grid-template-columns: 1fr; }
+  .about-img-wrap { max-width: 360px; margin: 0 auto; }
+
+  /* Contact */
+  .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+  /* Personality */
+  .personality-grid { grid-template-columns: 1fr; }
+
+  /* Hero */
+  .hero-btns { gap: 0.8rem; }
+}
+
+/* ── Mobile large (≤ 768px) ──────────────────────────────── */
+@media (max-width: 768px) {
+  :root {
+    --section-pad-v: 3rem;
+    --section-pad-h: 1.25rem;
+  }
+
+  /* Gallery */
+  .gallery-grid, .cert-grid { columns: 2; }
+
+  /* Projects */
+  .projects-grid { grid-template-columns: 1fr; }
+
+  /* Services */
+  .services-grid { grid-template-columns: 1fr; }
+
+  /* Skills */
+  .skills-grid { grid-template-columns: repeat(auto-fill, minmax(175px, 1fr)); }
+
+  /* Blog */
+  .blog-grid { grid-template-columns: 1fr; }
+
+  /* Personality cards */
+  .personality-cards { grid-template-columns: 1fr 1fr; }
+
+  /* Social profile */
+  .social-profile-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* Form row */
+  .form-row { grid-template-columns: 1fr; }
+
+  /* Footer */
+  footer { flex-direction: column; text-align: center; }
+  .footer-links { justify-content: center; }
+
+  /* Lightbox nav */
+  .lightbox-nav { display: none; }
+
+  /* Page hero */
+  .page-hero { min-height: 28vh; }
+}
+
+/* ── Mobile small (≤ 480px) ──────────────────────────────── */
+@media (max-width: 480px) {
+  .hero-btns { flex-direction: column; align-items: center; }
+  .btn-primary, .btn-outline { width: 100%; justify-content: center; max-width: 300px; }
+
+  .gallery-grid, .cert-grid { columns: 1; }
+
+  .social-profile-grid { grid-template-columns: repeat(2, 1fr); }
+
+  .skills-grid { grid-template-columns: 1fr; }
+
+  .timeline { padding-left: 1.5rem; }
+  .timeline-item { padding-left: 1.2rem; }
+  .timeline-dot { left: -2rem; }
+
+  .personality-cards { grid-template-columns: 1fr; }
+
+  .filter-bar { gap: 0.4rem; }
+  .filter-btn, .gallery-tab { font-size: 0.75rem; padding: 0.4rem 0.85rem; }
+
+  /* Hero */
+  .hero-badge { font-size: 0.65rem; }
+}
+
+/* ── Cursor — disable on touch ───────────────────────────── */
+@media (hover: none) and (pointer: coarse) {
+  #cursor-dot,
+  #cursor-ring { display: none; }
+  body { cursor: auto; }
+}
+
+/* ── Print (CV page) ─────────────────────────────────────── */
+@media print {
+  #navbar,
+  .cv-print-actions,
+  #bg-canvas,
+  #cursor-dot,
+  #cursor-ring,
+  #loading-screen { display: none !important; }
+
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    cursor: auto !important;
+    font-size: 11pt;
+  }
+
+  .cv-page {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .cv-sheet {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    border: none !important;
+    max-width: 100% !important;
+    padding: 1cm 1.5cm !important;
+    page-break-inside: avoid;
+  }
+
+  .cv-sidebar {
+    background: #0b525b !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  a { color: inherit !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
+}

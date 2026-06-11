@@ -1,0 +1,179 @@
+/* ============================================================
+   hero.css  — Hero section ONLY
+   Cursor + Loading styles are in cursor.css (loaded globally)
+   ============================================================ */
+
+/* ============================================================
+   HERO SECTION
+   ============================================================ */
+
+#hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: calc(var(--nav-h) + 2rem);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero-inner {
+  max-width: 840px;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+/* Badge */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  border: 1px solid rgba(0, 212, 232, 0.25);
+  border-radius: var(--radius-pill);
+  padding: 0.4rem 1.1rem;
+  background: rgba(0, 212, 232, 0.06);
+  margin-bottom: 2.2rem;
+  animation: fade-up 0.7s ease both;
+}
+
+/* Name */
+.hero-name {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 8.5vw, 6.5rem);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  background: linear-gradient(140deg, #e8f4f8 0%, var(--accent-cyan) 38%, var(--accent-teal) 65%, var(--accent-violet) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: fade-up 0.7s 0.12s ease both;
+}
+
+/* Tagline */
+.hero-tagline {
+  font-family: var(--font-mono);
+  font-size: clamp(0.75rem, 1.8vw, 0.92rem);
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 0.8rem 0 1.4rem;
+  animation: fade-up 0.7s 0.22s ease both;
+}
+
+/* Rotating typewriter */
+.hero-rotating-wrap {
+  min-height: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2.8rem;
+  animation: fade-up 0.7s 0.32s ease both;
+}
+.hero-rotating {
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.6vw, 1.35rem);
+  font-weight: 600;
+  color: var(--accent-cyan);
+  border-right: 2px solid var(--accent-cyan);
+  padding-right: 4px;
+  white-space: nowrap;
+  animation: cursor-blink 0.75s steps(1) infinite;
+}
+@keyframes cursor-blink { 50% { border-color: transparent; } }
+
+/* Buttons */
+.hero-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  animation: fade-up 0.7s 0.42s ease both;
+}
+
+/* Scroll indicator */
+.hero-scroll {
+  position: absolute;
+  bottom: 2.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  animation: scroll-bounce 2.5s ease infinite;
+  z-index: 2;
+}
+.scroll-arrow {
+  width: 16px; height: 16px;
+  border-right: 1.5px solid var(--text-muted);
+  border-bottom: 1.5px solid var(--text-muted);
+  transform: rotate(45deg);
+}
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.6; }
+  50%       { transform: translateX(-50%) translateY(10px); opacity: 1; }
+}
+
+/* ── Shared fade-up keyframe ─────────────────────────── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Hero background image (cover.png / hero images) ───────── */
+.hero-bg-image {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.hero-bg-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  opacity: 0.18;
+  filter: saturate(0.4) brightness(0.6);
+  transform: scale(1.04);
+  transition: transform 8s ease;
+}
+#hero:hover .hero-bg-image img {
+  transform: scale(1.08);
+}
+/* Gradient overlay on top of bg image */
+.hero-bg-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(8, 20, 28, 0.55) 0%,
+    rgba(8, 20, 28, 0.25) 40%,
+    rgba(8, 20, 28, 0.80) 100%
+  );
+}
+
+/* ── Light-mode hero overrides ─────────────────────────────── */
+body.light .hero-name {
+  background: linear-gradient(140deg, #0d2030 0%, #006466 38%, #0b525b 65%, #4d194d 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+body.light .hero-tagline  { color: #4a7080; }
+body.light .hero-rotating { color: var(--stormy-teal); border-right-color: var(--stormy-teal); }
+body.light .hero-scroll   { color: #6a9090; }
+body.light .scroll-arrow  { border-color: #6a9090; }
