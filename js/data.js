@@ -238,6 +238,20 @@ const SiteData = {
     //   tech:     ["MATLAB","MS Excel","Protective Relay Testing"],
     //   image:    "assets/images/substation/substation_1.jpg",
     // },
+    
+    {
+      id:       "taka-journal",
+      featured: true,
+      cat:      "design",
+      icon:     "📰",
+      tag:      "Web Design",
+      title:    "Personal Money Flow Accounting",
+      desc:     "This is a simple yet elegant solution for tracking personal finances.",
+      fullDesc: "A simple yet elegant solution for tracking personal finances, built with a focus on usability and visual appeal.",
+      tech:     ["HTML5","CSS3 (8 modules)","JavaScript (ES6+)","Web3Forms","Canvas API","CSS Grid", "Claude AI for content generation"],
+      image:    "",
+      liveUrl:  "apps/taka-journal/index.html",
+    },
     {
       id:       "smart-grid-monitor",
       featured: true,

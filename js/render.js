@@ -167,7 +167,8 @@ const Render = (() => {
         <div class="project-card reveal${delay}" data-cat="${pr.cat}"
              data-modal-icon="${pr.icon}" data-modal-title="${pr.title}"
              data-modal-tag="${pr.tag}"   data-modal-desc="${pr.fullDesc}"
-             data-modal-tech="${pr.tech.join(',')}">
+                          data-modal-tech="${pr.tech.join(',')}"
+             data-modal-live-url="${pr.liveUrl || ''}">
           <div class="project-thumb" style="${!pr.image?'background:linear-gradient(135deg,var(--dark-teal-3),var(--space-indigo))':''}">
             ${img}
             <div class="project-thumb-icon" ${pr.image?'style="display:none"':''}>${pr.icon}</div>
@@ -482,7 +483,7 @@ const Render = (() => {
       <div class="glass-card reveal" style="padding:1.8rem">
   <div style="text-align:center">
         <div class="sidebar-avatar">
-          <img src="${p('assets/images/profile/profile_1.jpg')}" alt="${d.name}" onerror="this.outerHTML='<span>👤</span>'">
+          <img src="${p('assets/images/profile/profile_2.jpg')}" alt="${d.name}" onerror="this.outerHTML='<span>👤</span>'">
         </div>
         <div class="sidebar-name">${d.name}</div>
         <div class="sidebar-role">${d.role} · ${d.orgShort}</div>
@@ -603,7 +604,16 @@ const Render = (() => {
       <div style="font-family:var(--font-display);font-size:1.4rem;font-weight:800;color:var(--text-primary);margin-bottom:.9rem">${card.dataset.modalTitle}</div>
       <div style="font-size:.92rem;color:var(--text-secondary);line-height:1.8;margin-bottom:1.5rem">${card.dataset.modalDesc}</div>
       <div style="font-family:var(--font-mono);font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent-cyan);margin-bottom:.7rem">Technologies Used</div>
-      <div class="chips-row">${card.dataset.modalTech.split(',').map(t=>`<span class="chip">${t.trim()}</span>`).join('')}</div>`;
+            <div class="chips-row">${card.dataset.modalTech.split(',').map(t=>`<span class="chip">${t.trim()}</span>`).join('')}</div>
+      ${card.dataset.modalLiveUrl ? `
+      <div style="margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid var(--glass-border);display:flex;gap:.8rem;flex-wrap:wrap">
+        <a href="${card.dataset.modalLiveUrl.startsWith('http') ? card.dataset.modalLiveUrl : (window.location.pathname.includes('/pages/') ? '../' : '') + card.dataset.modalLiveUrl}" target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:.5rem;padding:.65rem 1.4rem;border-radius:var(--radius-md);background:linear-gradient(135deg,var(--stormy-teal),var(--dark-teal-2));border:1px solid rgba(0,212,232,.3);color:var(--accent-cyan);font-size:.88rem;font-weight:600;text-decoration:none;transition:all .25s;box-shadow:0 4px 20px rgba(0,100,102,.35)"
+           onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 32px rgba(0,100,102,.55)'"
+           onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(0,100,102,.35)'">
+          🚀 Open Live App
+        </a>
+      </div>` : ''}`;
     openModal('proj-modal');
   }
 
