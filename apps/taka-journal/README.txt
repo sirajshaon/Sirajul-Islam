@@ -14,4 +14,4 @@ now and then, and keep the .json file safe. Restore it from More > Restore.
 REPORTS (filters, sorting, Full/Summary/Transactions download, PDF and JPG)
 Reports tab > choose period > Download PDF or Download JPG.
 
-FILES: index.html, style.css, app.js, lib/ (PDF and JPG tools, keep this folder)
+FILES: index.html, style.css, app.js, firebase-config.js, lib/ (keep all). Account/cloud sync: see SETUP-CLOUD.txt

@@ -4,7 +4,7 @@ const $=s=>document.querySelector(s),nd=new Date(),KEY='tj1',MN=['January','Febr
 let S,V={tab:'home',y:nd.getFullYear(),m:nd.getMonth(),sel:null,f:{q:'',k:'',c:'',p:'',mo:'',s:'new',min:0,max:0},ed:null,rs:null};
 function def(){return{tx:[],cats:DEFS.split(';').map((s,i)=>{const[a,b,c,d]=s.split('|');return{id:'c'+i,name:a,icon:b,color:c,on:true,subs:d.split(',')}}),inc:['Salary','Freelance','Business','Gift','Interest','Other'],pay:['Cash','Bank','bKash','Nagad','Card','Other'],bud:{t:0,c:{}},theme:'system',ac:'#0f766e'}}
 function load(){try{const j=localStorage.getItem(KEY);if(j)return JSON.parse(j)}catch(e){}return def()}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+function save(raw){if(!raw)stamp();try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}if(!raw)schedSync()}
 const iso=d=>new Date(d.getTime()-d.getTimezoneOffset()*6e4).toISOString().slice(0,10),TODAY=()=>iso(new Date());
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmt=p=>(p<0?'-':'')+'৳'+(Math.abs(p)/100).toLocaleString('en-IN',{maximumFractionDigits:2});
@@ -46,7 +46,7 @@ tx(){const f=V.f;return`<h2>Transactions</h2><div class=cd><input placeholder="S
 <div class=ctl><select onchange="V.f.p=this.value;R()"><option value="">All payment methods</option>${S.pay.map(c=>`<option ${f.p==c?'selected':''}>${esc(c)}</option>`).join('')}</select><input type=month value="${f.mo}" onchange="V.f.mo=this.value;R()"></div>
 <div class=ctl><input class=sm style="flex:1" inputmode=decimal placeholder="Min ৳" value="${f.min?f.min/100:''}" onchange="V.f.min=toP(this.value)||0;R()"><input class=sm style="flex:1" inputmode=decimal placeholder="Max ৳" value="${f.max?f.max/100:''}" onchange="V.f.max=toP(this.value)||0;R()"><select onchange="V.f.s=this.value;R()">${[['new','Newest'],['old','Oldest'],['hi','Highest'],['lo','Lowest']].map(([a,b])=>`<option value=${a} ${f.s==a?'selected':''}>${b}</option>`).join('')}</select></div></div><div id=lst>${lst()}</div>`},
 more(){const q=(c,i)=>`<div class=r><label><input type=checkbox style="width:auto" ${c.on?'checked':''} onchange="tg(${i})"> ${c.icon} ${esc(c.name)}</label><span><button class="ib ghost" onclick="mv(${i})">↑</button><button class="ib ghost" onclick="editCat(${i})">✎</button></span></div>`;
-return`<h2>Settings</h2><div class=cd><h3>Appearance</h3><div class=r><span>Theme</span><select onchange="S.theme=this.value;save();R()">${['system','light','dark'].map(x=>`<option ${S.theme==x?'selected':''}>${x}</option>`).join('')}</select></div><div class=r><span>Accent color</span><input type=color style="width:60px" value="${S.ac}" onchange="S.ac=this.value;save();R()"></div><div class=r><span>Currency</span><b>Taka (৳)</b></div></div>
+return`<h2>Settings</h2>${acct()}<div class=cd><h3>Appearance</h3><div class=r><span>Theme</span><select onchange="S.theme=this.value;save();R()">${['system','light','dark'].map(x=>`<option ${S.theme==x?'selected':''}>${x}</option>`).join('')}</select></div><div class=r><span>Accent color</span><input type=color style="width:60px" value="${S.ac}" onchange="S.ac=this.value;save();R()"></div><div class=r><span>Currency</span><b>Taka (৳)</b></div></div>
 <div class=cd><h3>Budgets (৳ per month)</h3>${bsum()?`<div class=r><b>Overall (total of categories)</b><b>${fmt(bsum())}</b></div>`:`<div class=r><b>Overall</b><input class=sm inputmode=decimal value="${S.bud.t/100||''}" onchange="setB('t',this.value)"></div><small>Or fill the category budgets below. The overall budget then becomes their total (empty counts as 0).</small>`}${S.cats.filter(c=>c.on).map(c=>`<div class=r><span>${c.icon} ${esc(c.name)}</span><input class=sm inputmode=decimal value="${(S.bud.c[c.id]||0)/100||''}" onchange="setB('${c.id}',this.value)"></div>`).join('')}</div>
 <div class=cd><h3>Categories</h3><small>Tap ✎ to edit or delete. Past transactions always stay safe.</small>${S.cats.map((c,i)=>c.arch?'':q(c,i)).join('')}<div class=r><input id=nc placeholder="New category"><input id=ni style="width:70px" placeholder="😀" maxlength=2><button class=pri onclick="addC()">Add</button></div><div class=r><select id=sc>${S.cats.filter(c=>!c.arch).map(c=>`<option value=${c.id}>${esc(c.name)}</option>`).join('')}</select><input id=ns placeholder="New subcategory"><button class=pri onclick="addS()">Add</button></div></div>
 <div class=cd><h3>Income categories</h3>${S.inc.map((p,i)=>`<span class=chip>${esc(p)} <a onclick="if(S.inc.length>1){S.inc.splice(${i},1);save();R()}">✕</a></span>`).join('')}<div class=r><input id=nin placeholder="New income category"><button class=pri onclick="addI()">Add</button></div></div>
@@ -86,7 +86,6 @@ function showIO(txt,l){$('#io').innerHTML=`<p class=mu>${l}</p><textarea id=iot 
 function cp(){const t=$('#iot');t.select();try{navigator.clipboard.writeText(t.value).then(()=>toast('Copied'),()=>{document.execCommand('copy');toast('Copied')})}catch(e){document.execCommand('copy');toast('Copied')}}
 function chk(){try{const o=JSON.parse($('#rs').value),d=o.data;if(o.app!='tj'||!Array.isArray(d.tx)||!Array.isArray(d.cats)||!Array.isArray(d.inc)||!Array.isArray(d.pay)||!d.bud||d.tx.some(t=>!t.id||!Number.isInteger(t.a)||!/^\d{4}-\d\d-\d\d$/.test(t.d)))throw 0;V.rs=d;$('#rm').innerHTML=`Valid backup: ${d.tx.length} transactions, ${d.cats.length} categories. This will replace the data on this device.<br><button class=pri onclick="doRs()">Replace my current data</button>`}catch(e){$('#rm').textContent='This is not a valid backup. Nothing was changed.'}}
 function doRs(){S=V.rs;save();R();toast('Backup restored')}
-S=load();R();
 
 function dlFile(n,t){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:'text/plain;charset=utf-8'}));a.download=n;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);toast('Saved '+n)}
 function rf(i){const f=i.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{$('#rs').value=r.result;chk()};r.readAsText(f)}
@@ -201,3 +200,50 @@ const doc=new window.jspdf.jsPDF({unit:'mm',format:'a4'});
 pg.forEach(([a,b],i)=>{const s=document.createElement('canvas'),sy=Math.round(a*sc);s.width=c.width;s.height=Math.max(1,Math.min(c.height-sy,Math.round((b-a)*sc)));const x=s.getContext('2d');x.fillStyle=bg;x.fillRect(0,0,s.width,s.height);x.drawImage(c,0,sy,c.width,s.height,0,0,c.width,s.height);
 if(i)doc.addPage();doc.addImage(s.toDataURL('image/jpeg',.9),'JPEG',10,10,190,s.height/sc*190/W);doc.setFontSize(8);doc.setTextColor(120);doc.text('Taka Journal - '+ttl+' - '+TODAY(),10,292);doc.text('Page '+(i+1)+' of '+pg.length,200,292,{align:'right'})});
 doc.save(nm+'.pdf');toast('Saved '+nm+'.pdf')}catch(err){console.error(err);toast('Could not create the file')}}
+
+/* ===== Optional account + cloud sync (Firebase REST, free plan) ===== */
+const FB=window.TJ_FIREBASE||{},fbOn=()=>!!(FB.apiKey&&FB.projectId);
+let AU=null;try{AU=JSON.parse(localStorage.getItem('tj_auth'))}catch(e){}
+const saveAU=()=>{try{AU?localStorage.setItem('tj_auth',JSON.stringify(AU)):localStorage.removeItem('tj_auth')}catch(e){}};
+let SY={busy:false,t:+(()=>{try{return localStorage.getItem('tj_last_sync')}catch(e){return 0}})()||0,err:'',ch:false,again:false};
+const tk=t=>JSON.stringify([t.k,t.a,t.d,t.c,t.s,t.p,t.desc,t.n]),sk=()=>JSON.stringify([S.cats,S.inc,S.pay,S.bud]);
+let HM=new Map(),SK='';
+function rebuildHM(){HM=new Map(S.tx.map(t=>[t.id,tk(t)]));SK=sk()}
+function stamp(){const now=Date.now(),ids=new Set();S.del=S.del||{};S.tx.forEach(t=>{ids.add(t.id);const k=tk(t);if(HM.get(t.id)!==k){t.u=now;HM.set(t.id,k)}});[...HM.keys()].forEach(id=>{if(!ids.has(id)){S.del[id]=now;HM.delete(id)}});const k=sk();if(k!==SK){S.su=now;SK=k}}
+async function fbAuth(path,body){const r=await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:${path}?key=${FB.apiKey}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}),j=await r.json();if(!r.ok)throw new Error((j.error&&j.error.message)||'Error');return j}
+const authMsg=m=>/EXISTS/.test(m)?'This email already has an account. Please sign in.':/INVALID_LOGIN|INVALID_PASSWORD|EMAIL_NOT_FOUND|INVALID_CREDENTIAL/.test(m)?'Wrong email or password.':/WEAK/.test(m)?'Password must be at least 6 characters.':/INVALID_EMAIL|MISSING_EMAIL/.test(m)?'Please enter a valid email.':/TOO_MANY/.test(m)?'Too many tries. Please wait a few minutes.':/fetch|Network/i.test(m)?'No internet connection.':m;
+const syncHelp=m=>/permission|PERMISSION/i.test(m)?'Permission denied. Check the Firestore rules (see SETUP-CLOUD.txt).':/fetch|Network/i.test(m)?'No internet. It will retry later.':m;
+function setAU(j){AU={uid:j.localId||j.user_id,email:j.email||(AU&&AU.email),rt:j.refreshToken||j.refresh_token,it:j.idToken||j.id_token,exp:Date.now()+(+(j.expiresIn||j.expires_in)-60)*1000};saveAU()}
+async function tok(){if(!AU)throw new Error('Signed out');if(Date.now()<AU.exp)return AU.it;const r=await fetch(`https://securetoken.googleapis.com/v1/token?key=${FB.apiKey}`,{method:'POST',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:'grant_type=refresh_token&refresh_token='+encodeURIComponent(AU.rt)}),j=await r.json();if(!r.ok){if(/TOKEN_EXPIRED|USER_DISABLED|USER_NOT_FOUND|INVALID_REFRESH/.test((j.error&&j.error.message)||'')){AU=null;saveAU();R()}throw new Error('Please sign in again')}setAU({...j,email:AU.email});return AU.it}
+const FS=()=>`https://firestore.googleapis.com/v1/projects/${FB.projectId}/databases/(default)/documents/users/${AU.uid}/data`;
+async function fsReq(url,opt){const t=await tok(),r=await fetch(url,{...opt,headers:{Authorization:'Bearer '+t,'Content-Type':'application/json'}});if(!r.ok){const j=await r.json().catch(()=>({}));throw new Error((j.error&&j.error.message)||'HTTP '+r.status)}return r.json()}
+async function fsList(){const out=[];let pt='';do{const j=await fsReq(FS()+'?pageSize=100'+(pt?'&pageToken='+encodeURIComponent(pt):''));(j.documents||[]).forEach(d=>out.push(d));pt=j.nextPageToken||''}while(pt);return out}
+const fsPut=(id,s)=>fsReq(FS()+'/'+id+'?updateMask.fieldPaths=json',{method:'PATCH',body:JSON.stringify({fields:{json:{stringValue:s}}})});
+const PJ=s=>{try{return JSON.parse(s)}catch(e){return null}};
+async function syncNow(){if(!fbOn()||!AU)return;if(SY.busy){SY.again=true;return}SY.busy=true;SY.ch=false;
+try{const rm={};(await fsList()).forEach(d=>{rm[d.name.split('/').pop()]=(d.fields&&d.fields.json&&d.fields.json.stringValue)||''});
+stamp();const tx=new Map(S.tx.map(t=>[t.id,t])),del={...(S.del||{})},rd=PJ(rm.del)||{};for(const k in rd)del[k]=Math.max(del[k]||0,rd[k]);
+for(const k in rm)if(k.startsWith('tx-'))(PJ(rm[k])||[]).forEach(t=>{const l=tx.get(t.id);if(!l||(t.u||0)>(l.u||0)){tx.set(t.id,t);SY.ch=true}});
+for(const[id,t]of[...tx])if(del[id]&&del[id]>=(t.u||0)){tx.delete(id);SY.ch=true}
+const cut=Date.now()-180*864e5;for(const k in del)if(del[k]<cut)delete del[k];
+const rs=PJ(rm.settings);if(rs&&(rs.su||0)>(S.su||0)){S.cats=rs.cats;S.inc=rs.inc;S.pay=rs.pay;S.bud=rs.bud;S.su=rs.su;SY.ch=true}
+S.tx=[...tx.values()];S.del=del;rebuildHM();save(true);
+const by={};S.tx.forEach(t=>(by[t.d.slice(0,4)]=by[t.d.slice(0,4)]||[]).push(t));for(const k in rm)if(k.startsWith('tx-')&&!by[k.slice(3)])by[k.slice(3)]=[];
+const jobs=[];for(const y in by){const s=JSON.stringify(by[y].sort((a,b)=>a.id<b.id?-1:1));if(s!==rm['tx-'+y])jobs.push(['tx-'+y,s])}
+const ds=JSON.stringify(del);if(ds!==rm.del)jobs.push(['del',ds]);const ss=JSON.stringify({su:S.su||0,cats:S.cats,inc:S.inc,pay:S.pay,bud:S.bud});if(ss!==rm.settings)jobs.push(['settings',ss]);
+for(const[j,s]of jobs)await fsPut(j,s);
+SY.t=Date.now();SY.err='';try{localStorage.setItem('tj_last_sync',SY.t)}catch(e){}}
+catch(e){SY.err=e.message||'error'}finally{SY.busy=false;if(SY.again){SY.again=false;schedSync()}}}
+function schedSync(){if(!fbOn()||!AU)return;clearTimeout(schedSync.h);schedSync.h=setTimeout(async()=>{await syncNow();if(SY.ch||V.tab=='more')R()},2500)}
+async function login(mode){const e=$('#ae').value.trim(),p=$('#ap').value;if(!e||!p){toast('Enter email and password');return}
+try{toast('Please wait…');setAU(await fbAuth(mode=='up'?'signUp':'signInWithPassword',{email:e,password:p,returnSecureToken:true}));AU.email=e;saveAU();await syncNow();R();toast(SY.err?'Signed in. Sync problem: '+syncHelp(SY.err):'Signed in and synced')}catch(err){toast(authMsg(err.message))}}
+async function resetPw(){const e=$('#ae').value.trim();if(!e){toast('Enter your email first');return}try{await fbAuth('sendOobCode',{requestType:'PASSWORD_RESET',email:e});toast('Password reset email sent')}catch(err){toast(authMsg(err.message))}}
+async function syncBtn(){toast('Syncing…');await syncNow();R();toast(SY.err?syncHelp(SY.err):'Synced')}
+async function signOut(b){await syncNow();if(SY.err&&!b.dataset.s){b.dataset.s=1;b.textContent='Sync failed. Tap again to sign out and erase this device';return}
+AU=null;saveAU();S=def();rebuildHM();save(true);SY.t=0;try{localStorage.removeItem('tj_last_sync')}catch(e){}R();toast('Signed out. This device was cleared.')}
+function acct(){const h='<h3>Account &amp; sync</h3>';
+if(!fbOn())return`<div class=cd>${h}<p class=mu style="margin:0">Cloud sync is not turned on. Your data stays on this device only. See SETUP-CLOUD.txt to turn it on.</p></div>`;
+if(!AU)return`<div class=cd>${h}<small>Sign in to use the same data on all your devices. Data already on this device is kept and uploaded.</small><div style="display:grid;gap:8px;margin-top:8px"><input id=ae type=email autocomplete=username placeholder="Email"><input id=ap type=password autocomplete=current-password placeholder="Password (6+ characters)"><div class=btns><button class=pri onclick="login('in')">Sign in</button><button onclick="login('up')">Create account</button></div><button class=ghost onclick="resetPw()">Forgot password?</button></div></div>`;
+return`<div class=cd>${h}<div class=r><b>${esc(AU.email)}</b></div><p class=mu style="margin:4px 0">${SY.busy?'Syncing…':SY.err?'Last sync failed: '+esc(syncHelp(SY.err)):SY.t?'Synced '+new Date(SY.t).toLocaleString():'Not synced yet'}</p><div class=btns><button class=pri onclick="syncBtn()">Sync now</button><button onclick="signOut(this)">Sign out</button></div><small>Signing out clears this device. Your data stays safe in your account.</small></div>`}
+S=load();rebuildHM();R();
+if(fbOn()&&AU){syncNow().then(()=>{if(SY.ch||V.tab=='more')R()});addEventListener('online',schedSync);document.addEventListener('visibilitychange',()=>{if(!document.hidden)schedSync()})}
