@@ -1,17 +1,22 @@
-Taka Journal - personal expense journal (works offline, no install)
+Taka Journal - personal expense journal
 
 HOW TO USE
-1. Unzip this folder anywhere (Desktop, USB, etc).
-2. Double-click index.html. It opens in your browser. That's all.
+1. Unzip this folder anywhere (Desktop, USB, etc) and double-click index.html, OR upload ALL files
+   (including the lib folder) to GitHub Pages and open the link on your phone.
+2. Optional: turn on accounts and cloud sync (free). See SETUP-CLOUD.txt.
+3. On a phone you can use "Add to Home screen" in the browser menu to install it like an app.
 
-ON A PHONE / OTHER DEVICES
-Upload the whole folder to GitHub Pages (or any web host) and open the link.
+UPDATING
+When you upload a new version to GitHub, wait about a minute, then reload the page once.
+If you still see the old design, close the tab and open the link again (or clear the site data once).
+
+RECEIPT PHOTOS
+Add a photo to any entry (camera or gallery). Tap the entry, then "View receipt" to see, save or make a PDF.
+Reports > Download: Receipts only gives one PDF with all receipts of a day, week, month or range.
 
 YOUR DATA
-Saved automatically in your browser on that device. Use More > Download backup
-now and then, and keep the .json file safe. Restore it from More > Restore.
+Without an account: saved in this browser on this device. With an account: saved automatically
+to your account and synced to all your devices. Download a backup now and then from Profile.
 
-REPORTS (filters, sorting, Full/Summary/Transactions download, PDF and JPG)
-Reports tab > choose period > Download PDF or Download JPG.
-
-FILES: index.html, style.css, app.js, firebase-config.js, lib/ (keep all). Account/cloud sync: see SETUP-CLOUD.txt
+FILES: index.html, style.css, app.js, firebase-config.js, manifest.json, sw.js, icon-192.png,
+icon-512.png, lib/ (PDF and JPG tools). Keep all of them together.
