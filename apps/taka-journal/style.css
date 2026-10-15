@@ -140,3 +140,17 @@ body.cap *,.pg *{animation:none!important;transition:none!important}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 .sw{display:flex;gap:10px;flex-wrap:wrap;margin:8px 0 2px}.swc{width:30px;height:30px;border-radius:50%;cursor:pointer;border:2px solid var(--cd);box-shadow:0 0 0 1px var(--ln);transition:transform .15s}.swc:active{transform:scale(.9)}.swc.on{box-shadow:0 0 0 3px var(--ac)}
 #nav a.on{color:var(--tx)}
+
+/* v9: native controls follow the theme; custom select arrow (no white native button) */
+:root{color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark}}
+:root[data-theme="dark"]{color-scheme:dark}
+select{-webkit-appearance:none;-moz-appearance:none;appearance:none;padding-right:36px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236a7783' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 13px center;background-size:14px;cursor:pointer}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]) select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2393a1ac' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")}}
+:root[data-theme="dark"] select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2393a1ac' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E")}
+select:hover,input:hover,textarea:hover{border-color:var(--ac)}
+select:hover{background-color:var(--bg)}
+option{background:var(--cd);color:var(--tx)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--ac);box-shadow:0 0 0 3px var(--acs)}
+.srch input:focus,.srch input:hover{box-shadow:none;border:0}
+input[type=checkbox],input[type=color],input[type=file]{box-shadow:none}
