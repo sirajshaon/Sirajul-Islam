@@ -1,0 +1,14 @@
+Taka Journal
+© 2026 Sirajul Islam
+Contact: siraj.shaon@gmail.com
+
+All rights reserved. This application, its design, source code and documentation
+are the property of the copyright holder. You may use it for your own personal
+bookkeeping. You may not copy, redistribute, sell or publish it, or build on it,
+without written permission from the copyright holder.
+
+Third-party components bundled with this app keep their own licenses:
+  - html2canvas (MIT License)         - used to create JPG/PDF pictures of pages
+  - jsPDF (MIT License)               - used to create PDF files
+  - Manrope typeface (SIL Open Font License 1.1) - the app's font
+  - Firebase (optional cloud sync)    - used under Google's terms when you enable it

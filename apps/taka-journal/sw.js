@@ -1,4 +1,5 @@
-const C='tj-v18';
-self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(C).then(c=>c.addAll(['./','index.html','style.css?v=18','app.js?v=18','firebase-config.js?v=18','manifest.json','lib/fonts/manrope-latin-wght-normal.woff2','lib/html2canvas.min.js','lib/jspdf.umd.min.js']).catch(()=>{})))});
+/*! Taka Journal — © 2026 Sirajul Islam <siraj.shaon@gmail.com>. All rights reserved. */
+const C='tj-v20';
+self.addEventListener('install',e=>{self.skipWaiting();e.waitUntil(caches.open(C).then(c=>c.addAll(['./','index.html','style.css?v=20','app.js?v=20','firebase-config.js?v=20','manifest.json','lib/fonts/manrope-latin-wght-normal.woff2','lib/html2canvas.min.js','lib/jspdf.umd.min.js']).catch(()=>{})))});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(k=>Promise.all(k.filter(x=>x!==C).map(x=>caches.delete(x)))).then(()=>self.clients.claim()))});
 self.addEventListener('fetch',e=>{const r=e.request;if(r.method!=='GET'||new URL(r.url).origin!==location.origin)return;e.respondWith(fetch(r).then(res=>{const cp=res.clone();caches.open(C).then(c=>c.put(r,cp));return res}).catch(()=>caches.match(r).then(m=>m||caches.match('index.html'))))});

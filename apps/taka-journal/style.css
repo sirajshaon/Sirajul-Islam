@@ -1,3 +1,4 @@
+/*! Taka Journal — © 2026 Sirajul Islam <siraj.shaon@gmail.com>. All rights reserved. */
 
 :root{--bg:#eef2f4;--cd:#fff;--tx:#17222b;--mu:#6a7783;--ln:#dde4e8;--ac:#0f766e;--rd:#d63b3b;--gn:#168a4a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11171c;--cd:#1b242b;--tx:#e6edf2;--mu:#93a1ac;--ln:#2a353e}}
@@ -388,3 +389,8 @@ body.cap .mnav .mlab{display:flex!important;border:0;background:none}
 .bgrid{margin-top:10px}
 .em{padding:14px 10px}
 @media(max-width:959px){.hg{gap:10px}.stats{gap:8px}.tile{padding:13px}.ph{margin-bottom:12px}.cd{padding:13px}}
+
+.cr{display:grid;gap:2px;justify-items:center;text-align:center;margin:14px auto 4px;font-size:12px;color:var(--mu)}
+.cr b{color:var(--tx);font-weight:800;letter-spacing:-.01em}
+.cr a{color:var(--mu);text-decoration:underline}.cr a:hover{color:var(--tx)}
+#gate .cr{margin-top:6px}

@@ -22,5 +22,8 @@ LAYOUT
 On a phone: a floating bottom bar with a big + button in the middle. On a laptop or tablet: a left sidebar and a wide dashboard.
 Export (PDF or JPG) is the button at the top right of each page. Filters are inside the small filter button next to the search box.
 
-FILES: index.html, style.css, app.js, firebase-config.js, manifest.json, sw.js, icon-192.png,
+COPYRIGHT
+© 2026 Sirajul Islam - siraj.shaon@gmail.com. All rights reserved. See LICENSE.txt.
+
+FILES: index.html, style.css, app.js, firebase-config.js, manifest.json, LICENSE.txt, sw.js, icon-192.png,
 icon-512.png, lib/ (PDF, JPG tools and the font). Keep all of them together.
