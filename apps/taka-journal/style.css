@@ -394,3 +394,11 @@ body.cap .mnav .mlab{display:flex!important;border:0;background:none}
 .cr b{color:var(--tx);font-weight:800;letter-spacing:-.01em}
 .cr a{color:var(--mu);text-decoration:underline}.cr a:hover{color:var(--tx)}
 #gate .cr{margin-top:6px}
+
+/* inline add / rename in the entry form, move-subcategory select */
+.sel1{display:flex;gap:8px;align-items:center}.sel1 select{flex:1;min-width:0}.sel1 .ib2{flex:none}
+.inrow{display:grid;gap:6px;padding:10px;border-radius:14px;background:var(--acs);border:1px dashed var(--ac)}
+.inrow>small{font-weight:800;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--mu)}
+.inrow .ctl{display:flex;gap:8px}.inrow .ctl>input{flex:1;min-width:0}.inrow .emo{flex:0 0 58px!important;width:58px!important;text-align:center;padding-left:6px;padding-right:6px}
+.inrow .ctl>button{flex:none}
+.mvs{flex:0 1 auto;max-width:44%;font-size:13px;padding:8px 28px 8px 10px}
